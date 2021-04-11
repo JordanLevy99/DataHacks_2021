@@ -1,4 +1,8 @@
 # DataHacks_2021
+
+*Note we had to recopy over all of our work for this project from another repo so the contributions do not necessarily reflect distribution of work.
+
+
 Welcome to our project for the Economic track of  DataHacks 2021!  
 
 In this repository you will find several source files that allow you to predict prosperity values and values of the 9 different pillars for every country in our dataset.  
