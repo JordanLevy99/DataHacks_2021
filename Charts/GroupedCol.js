@@ -10,7 +10,10 @@ document.getElementById('j1').appendChild(groupedcolct);
 Highcharts.chart(groupedcolct, {
 
     title: {
-      text: 'Bottom 5 Countries with Most Growth'
+      text: 'Bottom 5 Countries with Most Growth',
+      style: {
+        fontSize: '16px'
+      }
     },  
     yAxis: {
       title: {
@@ -27,11 +30,15 @@ Highcharts.chart(groupedcolct, {
       },
       tickInterval: 1
     },
-  
+    caption: {
+      text: '<b>Figure 5</b>',
+      align: 'center'
+    },
+
     legend: {
-      layout: 'vertical',
-      align: 'right',
-      verticalAlign: 'middle'
+      layout: 'horizontal',
+      align: 'center',
+      verticalAlign: 'bottom'
     },
   
     plotOptions: {
@@ -91,13 +98,17 @@ Highcharts.chart(groupedcolct, {
       type: 'column'
     },
     title: {
-      text: 'Column chart with negative values'
+      text: 'Pillar Growth per Bottom Countries'
     },
     xAxis: {
       categories: ['Central African Republic', 'Libya', 'Nigeria', 'Sudan', 'Venezuela']
     },
     credits: {
       enabled: false
+    },
+    caption: {
+      text: '<b>Figure 6</b>',
+      align: 'center'
     },
     series: [{
       name: 'Economic Quality',
