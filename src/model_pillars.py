@@ -39,19 +39,19 @@ class PillarExplainer:
         y = self.pillar_train[pillar][pillar]
 
         X_train, X_val, y_train, y_val = train_test_split(X, y, random_state=self.random_state, test_size=self.test_size)
-        return X, y, X_val#X_train, X_val, y_train, y_val
+        return X_train, X_val, y_train, y_val
 
-    def ensemble(self, pillar, X_train, y_train):
+    def ensemble(self, pillar, X_train, y_train, X_val, y_val):
         model_dict = {}
         for mod in ['svr', 'lasso', 'elastic']:
-            score, model = eval('self.'+mod)(pillar, X_train, y_train)
+            score, model = eval('self.'+mod)(pillar, X_train, y_train, X_val, y_val)
             score += random.uniform(-0.00000001, 0.00000001)
             model_dict[mod] = (score, model)
         top_score, top_model = sorted(model_dict.values())[-1]
         self.models[pillar] = top_model 
         return top_score, top_model
     
-    def svr(self, pillar, X_train, y_train):
+    def svr(self, pillar, X_train, y_train, X_val, y_val):
         """
         Returns svr model to be inputted into SHAP explainer.
         Returns score of svr model as well.
@@ -72,7 +72,7 @@ class PillarExplainer:
         print("Score of SVR model", score)
         return score, clf.best_estimator_
     
-    def lasso(self, pillar, X_train, y_train):
+    def lasso(self, pillar, X_train, y_train, X_val, y_val):
         """
         Returns lasso model to be inputted into SHAP explainer.
         Returns score of lasso model as well.
@@ -93,7 +93,7 @@ class PillarExplainer:
         print("Score of lasso model", score)
         return score, clf.best_estimator_
 
-    def elastic(self, pillar, X_train, y_train):
+    def elastic(self, pillar, X_train, y_train, X_val, y_val):
         parameters = {'alpha':np.linspace(0.1, 2.1, 10), 'l1_ratio':np.linspace(0, 1, 10)}
         en = ElasticNet()
         clf = GridSearchCV(en, parameters, cv=5)
@@ -170,10 +170,10 @@ class PillarExplainer:
 
     def get_model(self, pillar):
         # split into training and testing dataset
-        X_train, y_train, X_val = self.get_train_val(pillar)
+        X_train, X_val, y_train, y_val = self.get_train_val(pillar)
 
         # model and score of model
-        score, model = eval('self.'+self.mod_str)(pillar, X_train, y_train)
+        score, model = eval('self.'+self.mod_str)(pillar, X_train, y_train, X_val, y_val)
         #^^utilize score???
         return model, X_train, X_val
 
