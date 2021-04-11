@@ -1,3 +1,6 @@
+import os
+import pandas as pd
+
 def dict_of_datasets():
      """
      Returns a dictionary of the datasets
@@ -73,7 +76,7 @@ def read_in_pillars(remove_star=True):
 
  ###### Prompt 2: For finding the top 5 countries with most growth in prosperity ######
 
- def most_growth_5(most=True):
+def most_growth_5(most=True):
      """
      Gets you the top 5 countries with most growth if most is True
      or the bottom 5 countries with regressing growth if most is False.

@@ -1,5 +1,6 @@
 ###### For predicting impact of categories for each pillar ######
 
+import os
 import numpy as np
 from sklearn.model_selection import train_test_split
 import shap
@@ -16,16 +17,6 @@ class PillarExplainer:
         self.mod_str = mod
         self.models = {}
         self.pillars = list(self.pillar_train.keys())
-    
-#     def _remove_star_cols(self, data):
-#         """
-#         Return data without columns that only have "***"
-
-#         ----
-
-#         Used in get_impt_cat()
-#         """
-#         return {key: data[key].loc[:, ~(data[key].loc[0].apply(lambda x: '***' in str(x)))] for key in data}
 
 
     def get_train_val(self, pillar):
@@ -87,9 +78,9 @@ class PillarExplainer:
         explainer = shap.LinearExplainer(model, X_train, feature_dependence="independent")
         shap_values = explainer.shap_values(X_val)
         return shap_values
-    
-    
-    
+
+
+
     def shap_viz_1(self, df_shap,df):
         """
         Returns bar plot of each categories impact on pillar score
@@ -124,7 +115,7 @@ class PillarExplainer:
         ax = k2.plot.barh(x='Variable',y='SHAP_abs',color = colorlist, figsize=(5,6),legend=False)
         ax.set_xlabel("SHAP Value (Green = Positive Impact, Red = Negative Impact)")
 
-    
+
     def shap_viz_2(self, shap_values, X_val):
         """
         Returns fancy plot of each categories impact on pillar score
@@ -135,21 +126,21 @@ class PillarExplainer:
         shap.summary_plot(shap_values, X_val)
 
 
-        
+
     def get_model(self, pillar):
         # split into training and testing dataset
         X_train, X_val, y_train, y_val = self.get_train_val(pillar)
 
-        # model and score of model 
+        # model and score of model
         score, model = eval('self.'+self.mod_str)(pillar, X_train, y_train, X_val, y_val)
         #^^utilize score???
         return model, X_train, X_val
-    
+
     def get_models(self):
         for pillar in self.pillars:
             self.get_model(pillar)
         print('Done, check self.models')
-    
+
     def get_impt_cat(self, pillar):
         """
         Outputs viz of impact of categories.
@@ -160,8 +151,8 @@ class PillarExplainer:
         """
 
         model, X_train, X_val = self.get_model(pillar)
-        
-        # ***use X_test or X_train?    
+
+        # ***use X_test or X_train?
         shap_values = self.make_shap(model, X_train, X_val)
 
         # viz
@@ -169,4 +160,3 @@ class PillarExplainer:
         self.shap_viz_1(shap_values, X_val)
         # cooler looking version of shap_viz_1
         #shap_viz_2(shap_values, X_test)
-
