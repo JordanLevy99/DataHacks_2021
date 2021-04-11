@@ -5,7 +5,7 @@ Highcharts.chart('groupedcolct', {
       type: 'column'
     },
     title: {
-      text: 'Column chart with negative values'
+      text: 'Pillar Growth per Bottom Countries'
     },
     xAxis: {
       categories: ['Central African Republic', 'Libya', 'Nigeria', 'Sudan', 'Venezuela']
@@ -53,17 +53,25 @@ Highcharts.chart('groupedcolct', {
   });
 
 
-/////////////////// Top 5 Countries ///////////////////
+
+
+// /////////////////// Top 5 Countries ///////////////////
 
 // Highcharts.chart('groupedcolct', {
 //     chart: {
 //       type: 'column'
 //     },
 //     title: {
-//       text: 'Column chart with negative values'
+//       text: 'Pillar Growth per Top Countries'
 //     },
 //     xAxis: {
-//       categories: ['Ivory Coast', 'Georgia', 'Chad', 'Togo', 'Zimbabwe']
+//       categories: ['Ivory Coast', 'Georgia', 'Chad', 'Togo', 'Zimbabwe'],
+//     },
+//     yAxis: {
+//         title: {
+//           text: 'Growth Rate'
+//         },
+        
 //     },
 //     credits: {
 //       enabled: false

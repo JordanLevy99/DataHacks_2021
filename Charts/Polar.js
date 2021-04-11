@@ -12,7 +12,7 @@ Highcharts.chart(newP, {
         type: 'area'
     },
     title: {
-        text: 'Feature Profile of United States vs New Zealand',
+        text: 'Pillar Profile of United States vs New Zealand',
         x: -60,
         y: 2, 
         style: {
@@ -98,7 +98,7 @@ Highcharts.chart(newP, {
         type: 'area'
     },
     title: {
-        text: 'Feature Profile of United States vs Sweden',
+        text: 'Pillar Profile of United States vs Sweden',
         x: -60,
         y: 2, 
         style: {
@@ -139,13 +139,13 @@ Highcharts.chart(newP, {
     series: [{
         name: 'Sweden',
         data: [70.92474555969238, 82.64419651031494, 77.87182998657227, 73.1750955581665, 
-            84.62112998962402, 82.31127452850342, 85.53186893463135, 82.81623935699463, 60.34830141067505, 77.80496464835272],
+            84.62112998962402, 82.31127452850342, 85.53186893463135, 82.81623935699463, 60.34830141067505],
         color: Highcharts.getOptions().colors[1],
         pointPlacement: 'on'
     },{
         name: 'United States',
         data: [73.03541660308838, 77.26181125640869, 79.13576412200928, 68.90966510772705, 
-            69.17028331756592, 78.82894706726074, 74.10174083709717, 72.0220775604248, 66.29130554199219],
+            69.17028331756592, 78.82894706726074, 74.10174083709717, 72.0220775604248],
         pointPlacement: 'on'
     },],
     responsive: {

@@ -17,7 +17,8 @@ Highcharts.chart(newLR2, {
     yAxis: {
       title: {
         text: 'Average Global Prosperity'
-      }
+      },
+      endOnTick: true
     },
   
     xAxis: {
@@ -51,6 +52,9 @@ Highcharts.chart(newLR2, {
             58.02752553625484,
             58.27153523905255,
             58.28073075029229]
+    // }, {
+    //     name: 'Business Environment',
+    //     data: [47.92838970926784, 48.51531481902872, 49.25169350796898, 50.13334695444811, 50.95235329186356, 52.41147111726287, 53.32989147365493, 52.60430590738386],
     }],
     responsive: {
       rules: [{
