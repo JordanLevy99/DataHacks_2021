@@ -22,42 +22,6 @@ class PredictionModel(PillarExplainer):
         X = filt_data[filt_data.columns[1:]]
         return X
 
-
-#     def lasso(self, X_test, pillar):
-#         """
-#         Returns predictions and score of model.
-#         ----
-#         Used in predict()
-#         """
-
-#         X_train, X_val, y_train, y_val = self.get_train_val(pillar)
-
-#         Lreg = Lasso(alpha = self.alpha)
-#         Lreg.fit(X_train, y_train)
-
-
-#         predictions = Lreg.predict(X_test.iloc[: ,4:])
-#         score = Lreg.score(X_val, y_val)
-#         print("Score for lasso model for {0}:".format(pillar), score)
-
-#         return predictions
-
-#     def elastic(self, pillar, X_train, y_train, X_val, y_val):
-
-#         X_train, X_val, y_train, y_val = self.get_train_val(pillar)
-
-#         en = ElasticNet()
-#         en.fit(X_train, y_train)
-
-#         predictions = en.predict(X_test.iloc[: ,4:])
-
-# #         self.models[pillar] = en
-#         predictions = en.predict(X_test.iloc[: ,4:])
-#         score = en.score(X_val, y_val)
-#         print("Score for lasso model for {0}:".format(pillar), score)
-
-#         return predictions
-
     def predict_prosperity(self):
 
         res = pd.DataFrame()
