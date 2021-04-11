@@ -6,10 +6,15 @@ from sklearn.model_selection import train_test_split
 import shap
 import matplotlib.pyplot as plt
 from sklearn.linear_model import Lasso, ElasticNet
+from sklearn.model_selection import GridSearchCV
+from sklearn.svm import SVR
+from sklearn.model_selection import cross_val_score
+import warnings
 from src.etl import *
+import random
 
 class PillarExplainer:
-    def __init__(self, mod='lasso', random_state=42, test_size=0.3, alpha=0.5):
+    def __init__(self, mod='lasso', random_state=42, test_size=0.25, alpha=0.5):
         self.pillar_train, self.pillar_test = read_in_pillars(remove_star=True)
         self.random_state = random_state
         self.test_size = test_size
@@ -17,6 +22,7 @@ class PillarExplainer:
         self.mod_str = mod
         self.models = {}
         self.pillars = list(self.pillar_train.keys())
+        warnings.filterwarnings("ignore")
 
 
     def get_train_val(self, pillar):
@@ -35,7 +41,37 @@ class PillarExplainer:
         X_train, X_val, y_train, y_val = train_test_split(X, y, random_state=self.random_state, test_size=self.test_size)
         return X_train, X_val, y_train, y_val
 
+    def ensemble(self, pillar, X_train, y_train, X_val, y_val):
+        model_dict = {}
+        for mod in ['svr', 'lasso', 'elastic']:
+            score, model = eval('self.'+mod)(pillar, X_train, y_train, X_val, y_val)
+            score += random.uniform(-0.000001, 0.000001)
+            model_dict[mod] = (score, model)
+        top_score, top_model = sorted(model_dict.values())[-1]
+        self.models[pillar] = top_model 
+        return top_score, top_model
+    
+    def svr(self, pillar, X_train, y_train, X_val, y_val):
+        """
+        Returns svr model to be inputted into SHAP explainer.
+        Returns score of svr model as well.
 
+        ----
+
+        Used in get_impt_cat()
+        """
+        parameters = {'kernel':['rbf', 'poly'], 'C':[0.1, 0.25, 0.5, 1, 2]}
+        svr = SVR()
+        #Lreg.fit(X_train, y_train)
+        clf = GridSearchCV(svr, parameters, cv=5)
+        clf.fit(X_train, y_train)
+        self.models[pillar] = clf.best_estimator_
+        # plot predicted values vs true
+        #print(Lreg.predict(X_test))
+        score = clf.score(X_val, y_val)
+        print("Score of SVR model", score)
+        return score, clf.best_estimator_
+    
     def lasso(self, pillar, X_train, y_train, X_val, y_val):
         """
         Returns lasso model to be inputted into SHAP explainer.
@@ -45,26 +81,31 @@ class PillarExplainer:
 
         Used in get_impt_cat()
         """
+        parameters = {'alpha':np.linspace(0.1, 2.1, 10)}
         Lreg = Lasso(alpha = self.alpha)
-        Lreg.fit(X_train, y_train)
-        self.models[pillar] = Lreg
+        #Lreg.fit(X_train, y_train)
+        clf = GridSearchCV(Lreg, parameters, cv=5)
+        clf.fit(X_train, y_train)
+        self.models[pillar] = clf.best_estimator_
         # plot predicted values vs true
         #print(Lreg.predict(X_test))
-        score = Lreg.score(X_val, y_val)
+        score = clf.score(X_val, y_val)
         print("Score of lasso model", score)
-        return score, Lreg
+        return score, clf.best_estimator_
 
     def elastic(self, pillar, X_train, y_train, X_val, y_val):
+        parameters = {'alpha':np.linspace(0.1, 2.1, 10), 'l1_ratio':np.linspace(0, 1, 10)}
         en = ElasticNet()
-        en.fit(X_train, y_train)
-        self.models[pillar] = en
-        score = en.score(X_val, y_val)
+        clf = GridSearchCV(en, parameters, cv=5)
+        clf.fit(X_train, y_train)
+        self.models[pillar] = clf.best_estimator_
+        score = clf.score(X_val, y_val)
         print(f'Elastic net model score is {score} on test data')
 
         # consider adding y_pred here
 
 
-        return score, en
+        return score, clf.best_estimator_
 
 
     def make_shap(self, model, X_train, X_val):

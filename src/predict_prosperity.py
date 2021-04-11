@@ -1,6 +1,8 @@
 from src.model_pillars import *
 class PredictionModel(PillarExplainer):
-    # def __init__(self, mod='lasso', random_state=42, test_size=0.3, alpha=0.5):
+    def __init__(self, mod='lasso', random_state=42, test_size=0.25, alpha=0.5):
+        super().__init__(mod, random_state, test_size, alpha)
+        self.get_models()
 
         # self.pillar_train, self.pillar_test = read_in_pillars(remove_star=True)
         # self.random_state = random_state
@@ -20,55 +22,41 @@ class PredictionModel(PillarExplainer):
         X = filt_data[filt_data.columns[1:]]
         return X
 
-    def get_train_val(self, pillar):
-        """
-        Returns [pillar] dataset as training and testing dataset.
-        ----
-        Used in get_impt_cat()
-        """
-    #     random_state = 42
-        filt_data = self.pillar_train[pillar].loc[:, ~((self.pillar_train[pillar].columns.str.contains('year')) | (self.pillar_train[pillar].columns == pillar))]
-        X = filt_data[filt_data.columns[5:]]
-        y = self.pillar_train[pillar][pillar]
 
-        X_train, X_val, y_train, y_val = train_test_split(X, y, random_state=self.random_state, test_size=self.test_size)
-        return X_train, X_val, y_train, y_val
+#     def lasso(self, X_test, pillar):
+#         """
+#         Returns predictions and score of model.
+#         ----
+#         Used in predict()
+#         """
 
+#         X_train, X_val, y_train, y_val = self.get_train_val(pillar)
 
-    def lasso(self, X_test, pillar):
-        """
-        Returns predictions and score of model.
-        ----
-        Used in predict()
-        """
-
-        X_train, X_val, y_train, y_val = self.get_train_val(pillar)
-
-        Lreg = Lasso(alpha = self.alpha)
-        Lreg.fit(X_train, y_train)
+#         Lreg = Lasso(alpha = self.alpha)
+#         Lreg.fit(X_train, y_train)
 
 
-        predictions = Lreg.predict(X_test.iloc[: ,4:])
-        score = Lreg.score(X_val, y_val)
-        print("Score for lasso model for {0}:".format(pillar), score)
+#         predictions = Lreg.predict(X_test.iloc[: ,4:])
+#         score = Lreg.score(X_val, y_val)
+#         print("Score for lasso model for {0}:".format(pillar), score)
 
-        return predictions
+#         return predictions
 
-    def elastic(self, pillar, X_train, y_train, X_val, y_val):
+#     def elastic(self, pillar, X_train, y_train, X_val, y_val):
 
-        X_train, X_val, y_train, y_val = self.get_train_val(pillar)
+#         X_train, X_val, y_train, y_val = self.get_train_val(pillar)
 
-        en = ElasticNet()
-        en.fit(X_train, y_train)
+#         en = ElasticNet()
+#         en.fit(X_train, y_train)
 
-        predictions = en.predict(X_test.iloc[: ,4:])
+#         predictions = en.predict(X_test.iloc[: ,4:])
 
-#         self.models[pillar] = en
-        predictions = en.predict(X_test.iloc[: ,4:])
-        score = en.score(X_val, y_val)
-        print("Score for lasso model for {0}:".format(pillar), score)
+# #         self.models[pillar] = en
+#         predictions = en.predict(X_test.iloc[: ,4:])
+#         score = en.score(X_val, y_val)
+#         print("Score for lasso model for {0}:".format(pillar), score)
 
-        return predictions
+#         return predictions
 
     def predict_prosperity(self):
 
@@ -77,7 +65,7 @@ class PredictionModel(PillarExplainer):
         # predict pillar score for each country of each year
         for pillar in self.pillars:
             X_test = self.get_test_data(pillar)
-            res["{0}_preds".format(pillar)] = eval('self.'+self.mod_str)(X_test, pillar)
+            res["{0}_preds".format(pillar)] = self.models[pillar].predict(X_test.iloc[:, 4:])
 
         # calcualte prosperity score based on pillar scores
         res["prosperity_preds"] = res.mean(axis=1)
