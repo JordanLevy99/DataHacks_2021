@@ -1,54 +1,51 @@
 Highcharts.chart('groupedcolct', {
     chart: {
-        type: 'column'
+      type: 'column'
     },
     title: {
-        text: 'Top 3 Factors to Happiness for the Top 5 Countries',
-        style: {
-            color: 'dark gray'
-        }
+      text: 'Column chart with negative values'
     },
     xAxis: {
-        categories: ['Finland', 'Denmark', 'Norway', 'Iceland', 'Netherlands'],
-        labels: {
-            style: {
-                color: 'dark gray'
-            }
-        }
+      categories: ['Ivory Coast', 'Georgia', 'Chad', 'Togo', 'Zimbabwe']
     },
-    yAxis: {
-        allowDecimals: true,
-        min: 0,
-        title: {
-            text: 'Extent of Impact on Happiness',
-            style: {
-                color: 'dark gray'
-            }
-        },
-        labels: {
-            style: {
-                color: 'dark gray'
-            }
-        }
-    },
-    tooltip: {
-        formatter: function () {
-            return '<b>' + this.x + '</b><br/>' +
-                this.series.name + ': ' + this.y + '<br/>'
-        }
+    credits: {
+      enabled: false
     },
     series: [{
-        name: 'Social Support',
-        color: Highcharts.getOptions().colors[0],
-        data: [1.587, 1.573, 1.581, 1.624, 1.521],
+      name: 'Economic Quality',
+      data: [0.01443184786332763, 0.003992169395210521, 0.018528773656376618, 
+        0.011526959706490647, 0.002965119364473745]
     }, {
-        name: 'GDP',
-        color: Highcharts.getOptions().colors[5],
-        data: [1.34, 1.383, 1.488, 1.38, 1.396],
+        name: 'Business Environment',
+        data: [0.043732945405460466, 0.03323529411161408, 
+            0.050852023175399275, 0.04503690922731951, 0.06037747243014091]
     }, {
-        name: 'Life Expectancy',
-        color: Highcharts.getOptions().colors[6],
-        data: [0.986, 0.996, 1.028, 1.026, 0.999]
+        name: 'Governance',
+        data: [0.05674934471913118, 0.036756623334303073, 
+            0.011849554784280958, 0.018709900809051883, 0.06585881697512064]
+    }, {
+        name: 'Education',
+        data: [0.01443184786332763, 0.003992169395210521, 
+            0.018528773656376618, 0.011526959706490647, 0.002965119364473745]
+    }, {
+      name: 'Health',
+      data: [-0.00028438818429199486, -0.0032538281688444526, 
+        0.013872634163174302, 0.003928374262460954, 0.018976763832811994]
+    }, {
+        name: 'Safety and Security',
+        data: [-0.004313386893742721, 0.011764306634643784, 
+            0.023809014264994044, 0.0037501338327363687, 0.008068017652640203]
+    }, {
+        name: 'Personal Freedom',
+        data: [0.014123948856986424, 0.01723538915674583, 0.03187516088939524, 
+            0.05942296845910344, 0.008782066514060771]
+    }, {
+        name: 'Social Capital',
+        data: [0.011769761042057958, 0.01478402760491404, 0.023479314193096235, 
+            0.031381123092487195, 0.012339154473416158]
+    }, {
+      name: 'Natural Environment',
+      data: [0.007721158720545462, 0.007072280863614333, 0.01128134174104245, 
+        0.012435066762782832, 0.0025035262990638074]
     }]
-});
-
+  });
