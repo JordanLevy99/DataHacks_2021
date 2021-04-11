@@ -110,6 +110,10 @@ Highcharts.chart(newLRL, {
   xAxis: {
     categories: ['Ivory Coast', 'Georgia', 'Chad', 'Togo', 'Zimbabwe']
   },
+  yAxis: {
+    title: {
+      text: 'Average Change'
+  },
   credits: {
     enabled: false
   },

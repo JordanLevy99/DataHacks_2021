@@ -107,6 +107,10 @@ Highcharts.chart(groupedcolct, {
     xAxis: {
       categories: ['Central African Republic', 'Libya', 'Nigeria', 'Sudan', 'Venezuela']
     },
+    yAxis: {
+      title: {
+        text: 'Average Change'
+    },
     credits: {
       enabled: false
     },
