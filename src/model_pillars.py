@@ -2,13 +2,12 @@
 
 import os
 import numpy as np
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split, GridSearchCV, cross_val_score
 import shap
 import matplotlib.pyplot as plt
 from sklearn.linear_model import Lasso, ElasticNet
-from sklearn.model_selection import GridSearchCV
 from sklearn.svm import SVR
-from sklearn.model_selection import cross_val_score
+from sklearn.preprocessing import StandardScaler
 import warnings
 from src.etl import *
 import random
@@ -24,7 +23,10 @@ class PillarExplainer:
         self.pillars = list(self.pillar_train.keys())
         warnings.filterwarnings("ignore")
 
-
+    def standardize(self, X):
+        scaler = StandardScaler()
+        return scaler.fit_transform(X)
+    
     def get_train_val(self, pillar):
         """
         Returns [pillar] dataset as training and testing dataset.
@@ -69,7 +71,7 @@ class PillarExplainer:
         # plot predicted values vs true
         #print(Lreg.predict(X_test))
         score = clf.best_score_
-        print("Score of SVR model", score)
+        print(f"Score of SVR {pillar} model: {score}")
         return score, clf.best_estimator_
     
     def lasso(self, pillar, X_train, y_train, X_val, y_val):
@@ -90,7 +92,7 @@ class PillarExplainer:
         # plot predicted values vs true
         #print(Lreg.predict(X_test))
         score = clf.best_score_
-        print("Score of lasso model", score)
+        print(f"Score of Lasso {pillar} model: {score}")
         return score, clf.best_estimator_
 
     def elastic(self, pillar, X_train, y_train, X_val, y_val):
@@ -100,7 +102,7 @@ class PillarExplainer:
         clf.fit(X_train, y_train)
         self.models[pillar] = clf.best_estimator_
         score = clf.best_score_
-        print(f'Elastic net model score is {score} on test data')
+        print(f'Score of ElasticNet {pillar} model: {score}\n')
 
         # consider adding y_pred here
 
@@ -171,7 +173,7 @@ class PillarExplainer:
     def get_model(self, pillar):
         # split into training and testing dataset
         X_train, X_val, y_train, y_val = self.get_train_val(pillar)
-
+        X_train, X_val = self.standardize(X_train), self.standardize(X_val)
         # model and score of model
         score, model = eval('self.'+self.mod_str)(pillar, X_train, y_train, X_val, y_val)
         #^^utilize score???
