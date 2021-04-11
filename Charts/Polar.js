@@ -5,6 +5,7 @@ outerDiv1.id = 'j1';
 document.getElementById('polar').appendChild(outerDiv1);
 document.getElementById('j1').appendChild(newP);
 
+
 Highcharts.chart(newP, {
 
     chart: {

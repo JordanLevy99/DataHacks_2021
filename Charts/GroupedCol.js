@@ -1,11 +1,97 @@
-/////////////////// Bottom 5 Countries ///////////////////
 
-Highcharts.chart('groupedcolct', {
+/////////////////// Bottom 5 Countries ///////////////////
+var groupedcolct = document.createElement('figure');
+groupedcolct.className = 'pillar';
+var outerDiv1 = document.createElement('div');
+outerDiv1.id = 'j1';
+document.getElementById('groupedcolct').appendChild(outerDiv1);
+document.getElementById('j1').appendChild(groupedcolct);
+
+Highcharts.chart(groupedcolct, {
+
+    title: {
+      text: 'Bottom 5 Countries with Most Growth'
+    },  
+    yAxis: {
+      title: {
+        text: 'Prosperity'
+      },
+        min: 30,
+    //    max: 79,
+        startOnTick: true
+    },
+  
+    xAxis: {
+      accessibility: {
+        rangeDescription: 'Range: 2007 to 2014'
+      },
+      tickInterval: 1
+    },
+  
+    legend: {
+      layout: 'vertical',
+      align: 'right',
+      verticalAlign: 'middle'
+    },
+  
+    plotOptions: {
+      series: {
+        label: {
+          connectorAllowed: false
+        },
+        pointStart: 2007
+      }
+    },
+  
+    series: [{
+      name: 'Sudan',
+      data: [43.07338290744357, 42.93077278137207, 42.98777071634928, 42.775794135199654, 41.596841388278534, 40.329337226019966, 40.44776153564453, 38.85887993706597]
+    }, {
+      name: 'Venezuela',
+      data: [54.3490367465549, 52.686646143595375, 52.490030924479164, 52.824531979031036, 52.87612067328559, 53.172424952189125, 51.22822740342882, 50.26970566643609]
+    }, {
+      name: 'Central African Republic',
+      data: [40.610100428263344, 41.10119289822049, 40.41649023691813, 39.286528481377495, 40.2028488583035, 40.1312510172526, 37.64913643731011, 38.101737552218964]
+    }, {
+      name: 'Nigeria',
+      data: [48.40971967909071, 47.772352854410805, 45.7327880859375, 47.115267011854385, 47.67943149142795, 47.40531582302518, 46.17949761284722, 45.8256704542372]
+    }, {
+      name: 'Libya',
+      data: [48.11105495029025, 48.130608876546226, 48.09419737921821, 48.109451082017685, 47.0650143093533, 48.7695558336046, 48.256165186564125, 45.914572397867836]
+    }],
+  
+    responsive: {
+      rules: [{
+        condition: {
+          maxWidth: 500
+        },
+        chartOptions: {
+          legend: {
+            layout: 'horizontal',
+            align: 'center',
+            verticalAlign: 'bottom'
+          }
+        }
+      }]
+    }
+  
+  });
+
+/////////////////// Bottom 5 Countries ///////////////////
+var groupedcolct = document.createElement('figure');
+groupedcolct.className = 'pillar';
+var outerDiv1 = document.createElement('div');
+outerDiv1.id = 'j11';
+document.getElementById('groupedcolct').appendChild(outerDiv1);
+document.getElementById('j11').appendChild(groupedcolct);
+
+
+Highcharts.chart(groupedcolct, {
     chart: {
       type: 'column'
     },
     title: {
-      text: 'Pillar Growth per Bottom Countries'
+      text: 'Column chart with negative values'
     },
     xAxis: {
       categories: ['Central African Republic', 'Libya', 'Nigeria', 'Sudan', 'Venezuela']
@@ -54,63 +140,3 @@ Highcharts.chart('groupedcolct', {
 
 
 
-
-// /////////////////// Top 5 Countries ///////////////////
-
-// Highcharts.chart('groupedcolct', {
-//     chart: {
-//       type: 'column'
-//     },
-//     title: {
-//       text: 'Pillar Growth per Top Countries'
-//     },
-//     xAxis: {
-//       categories: ['Ivory Coast', 'Georgia', 'Chad', 'Togo', 'Zimbabwe'],
-//     },
-//     yAxis: {
-//         title: {
-//           text: 'Growth Rate'
-//         },
-        
-//     },
-//     credits: {
-//       enabled: false
-//     },
-//     series: [{
-//       name: 'Economic Quality',
-//       data: [0.01443184786332763, 0.003992169395210521, 0.018528773656376618, 
-//         0.011526959706490647, 0.002965119364473745]
-//     }, {
-//         name: 'Business Environment',
-//         data: [0.043732945405460466, 0.03323529411161408, 
-//             0.050852023175399275, 0.04503690922731951, 0.06037747243014091]
-//     }, {
-//         name: 'Governance',
-//         data: [0.05674934471913118, 0.036756623334303073, 
-//             0.011849554784280958, 0.018709900809051883, 0.06585881697512064]
-//     }, {
-//         name: 'Education',
-//         data: [0.01443184786332763, 0.003992169395210521, 
-//             0.018528773656376618, 0.011526959706490647, 0.002965119364473745]
-//     }, {
-//       name: 'Health',
-//       data: [-0.00028438818429199486, -0.0032538281688444526, 
-//         0.013872634163174302, 0.003928374262460954, 0.018976763832811994]
-//     }, {
-//         name: 'Safety and Security',
-//         data: [-0.004313386893742721, 0.011764306634643784, 
-//             0.023809014264994044, 0.0037501338327363687, 0.008068017652640203]
-//     }, {
-//         name: 'Personal Freedom',
-//         data: [0.014123948856986424, 0.01723538915674583, 0.03187516088939524, 
-//             0.05942296845910344, 0.008782066514060771]
-//     }, {
-//         name: 'Social Capital',
-//         data: [0.011769761042057958, 0.01478402760491404, 0.023479314193096235, 
-//             0.031381123092487195, 0.012339154473416158]
-//     }, {
-//       name: 'Natural Environment',
-//       data: [0.007721158720545462, 0.007072280863614333, 0.01128134174104245, 
-//         0.012435066762782832, 0.0025035262990638074]
-//     }]
-//   });

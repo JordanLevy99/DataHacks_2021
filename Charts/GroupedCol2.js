@@ -1,6 +1,12 @@
 /////////////////// Bottom 5 Countries ///////////////////
+var groupedcolct = document.createElement('figure');
+groupedcolct.className = 'pillar';
+var outerDiv1 = document.createElement('div');
+outerDiv1.id = 'j2';
+document.getElementById('pillar').appendChild(outerDiv1);
+document.getElementById('j2').appendChild(groupedcolct);
 
-Highcharts.chart('groupedcolct', {
+Highcharts.chart(groupedcolct, {
     chart: {
       type: 'column'
     },
