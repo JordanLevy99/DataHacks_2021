@@ -8,6 +8,9 @@ outerDiv1.id = 'k';
 document.getElementById('linregr2').appendChild(outerDiv1);
 document.getElementById('k').appendChild(newLR2);
 
+Highcharts.setOptions({
+  colors: ['#058DC7', '#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4']
+});
 
 Highcharts.chart(newLR2, {
 

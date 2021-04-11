@@ -1,10 +1,9 @@
 var newP = document.createElement('figure');
 newP.className = 'polarct';
 var outerDiv1 = document.createElement('div');
-outerDiv1.id = 'j1';
+outerDiv1.id = 'j2';
 document.getElementById('polar').appendChild(outerDiv1);
-document.getElementById('j1').appendChild(newP);
-
+document.getElementById('j2').appendChild(newP);
 
 Highcharts.chart(newP, {
 
@@ -25,7 +24,7 @@ Highcharts.chart(newP, {
     },
 
     xAxis: {
-        categories: ['Business Environment', 'Economic Quality', 'Education', 'Natural Environment',
+        categories: ['Business Environment', 'Economic Quality', 'Education', 'Natural Environment', 
         'Governance', 'Health', 'Personal Freedom', 'Safety and Security', 'Social Capital'],
         tickmarkPlacement: 'on',
         lineWidth: 0
@@ -54,13 +53,13 @@ Highcharts.chart(newP, {
     series: [{
         name: 'New Zealand',
         data: [72.72828102111816, 80.70532894134521, 76.07744121551514, 74.75693321228027, 
-            83.26545143127441, 80.4193754196167, 89.10429382324219, 79.43316459655762, 67.171875],
+        83.26545143127441, 80.4193754196167, 89.10429382324219, 79.43316459655762, 67.171875],
         color: Highcharts.getOptions().colors[1],
         pointPlacement: 'on'
     },{
         name: 'United States',
         data: [73.03541660308838, 77.26181125640869, 79.13576412200928, 68.90966510772705, 
-            69.17028331756592, 78.82894706726074, 74.10174083709717, 72.0220775604248, 66.29130554199219],
+            69.17028331756592, 78.82894706726074, 74.10174083709717, 72.0220775604248],
         pointPlacement: 'on'
     },],
     responsive: {
@@ -87,12 +86,11 @@ Highcharts.chart(newP, {
 var newP = document.createElement('figure');
 newP.className = 'polarct';
 var outerDiv1 = document.createElement('div');
-outerDiv1.id = 'j2';
+outerDiv1.id = 'j23';
 document.getElementById('polar').appendChild(outerDiv1);
-document.getElementById('j2').appendChild(newP);
+document.getElementById('j23').appendChild(newP);
 
 Highcharts.chart(newP, {
-
 
     chart: {
         polar: true,
