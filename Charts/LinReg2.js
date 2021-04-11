@@ -32,11 +32,10 @@ Highcharts.chart(newLR2, {
       },
       tickInterval: 1
     },
-  
     legend: {
-      layout: 'vertical',
-      align: 'right',
-      verticalAlign: 'middle'
+      layout: 'horizontal',
+      align: 'center',
+      verticalAlign: 'bottom'
     },
   
     plotOptions: {
@@ -114,9 +113,9 @@ Highcharts.chart(newLR2, {
         enabled: false
       },
       legend: {
-        layout: 'vertical',
-        align: 'right',
-        verticalAlign: 'middle'
+        layout: 'horizontal',
+        align: 'center',
+        verticalAlign: 'bottom'
       },
     
       plotOptions: {
