@@ -2,11 +2,11 @@ def dict_of_datasets():
      """
      Returns a dictionary of the datasets
      where key is pillar name and value is the [pillar]_train.csv
-     
+
      ---
-     
+
      Example run: d = dict_of_datasets(), get busi dataset by d['busi']
-     
+
      """
      d = {}
      directory = 'Datasets/'
@@ -32,17 +32,17 @@ def generate_prosperity():
     ### consider writing to csv, os.mkdir('Processed Data') <-- if not exists...
     return prosperity_data
 
- def get_prosperity_scores():
+def get_prosperity_scores():
      """
      Calculate prosperity score of each country for each year.
      Returns dataframe w/ pillar score & overall prosperity score
-     
+
      ---
-     
+
      Example run: prosperity_data = get_prosperity_scores()
-     
+
      """
-     pillars = ['busi', 'econ', 'educ', 'envi','gove', 'heal', 'pers', 'safe', 'soci']  
+     pillars = ['busi', 'econ', 'educ', 'envi','gove', 'heal', 'pers', 'safe', 'soci']
      prosperity_data = generate_prosperity()
      prosperity_data["prosperity"] = prosperity_data[pillars].mean(axis=1)
      return prosperity_data
@@ -68,23 +68,23 @@ def read_in_pillars(remove_star=True):
     if remove_star:
         train_data = remove_star_cols(train_data)
         test_data = remove_star_cols(test_data)
-    
+
     return train_data, test_data
 
  ###### Prompt 2: For finding the top 5 countries with most growth in prosperity ######
 
  def most_growth_5(most=True):
      """
-     Gets you the top 5 countries with most growth if most is True 
+     Gets you the top 5 countries with most growth if most is True
      or the bottom 5 countries with regressing growth if most is False.
-     
+
      ---
-     
+
      Example run: top5 = most_growth_5()
-     
+
      ---
-     
-     ** May need to change end to 2016 (add on to 
+
+     ** May need to change end to 2016 (add on to
      generate_prosperity in that case)
      """
      start = 2007
@@ -92,9 +92,9 @@ def read_in_pillars(remove_star=True):
 
      # prosperity data with prosperity scores
      prosperity_data = get_prosperity_scores()
-     pillars = ['busi', 'econ', 'educ', 'envi','gove', 'heal', 'pers', 'safe', 'soci']  
+     pillars = ['busi', 'econ', 'educ', 'envi','gove', 'heal', 'pers', 'safe', 'soci']
 
-     # average out all the pillars to get 
+     # average out all the pillars to get
      # prosperity score for a country in a certain year
      prosperity_data["prosperity"] = prosperity_data[pillars].mean(axis=1)
 
@@ -120,4 +120,3 @@ def read_in_pillars(remove_star=True):
          return prosperity_data_14.sort_values(by="CAGR", ascending = False)[:5].country.tolist()
      else:
          return prosperity_data_14.sort_values(by="CAGR", ascending = True)[:5].country.tolist()
-
