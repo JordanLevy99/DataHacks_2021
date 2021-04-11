@@ -19,18 +19,13 @@ Highcharts.chart(newP, {
             fontSize: '1vw',
         }
     },
-    subtitle: {
-        text: 'of the year 2019',
-        x: -60,
-        y: 20
-    },
     pane: {
         size: '80%'
     },
 
     xAxis: {
-        categories: ['GDP','Life Expectancy', 'Freedom', 'Lack of Government Corruption', 'Generosity',
-        'Social Support'],
+        categories: ['Business Environment', 'Economic Quality', 'Education', 'Natural Environment', 
+        'Governance', 'Health', 'Personal Freedom', 'Safety and Security', 'Social Capital'],
         tickmarkPlacement: 'on',
         lineWidth: 0
     },
@@ -57,12 +52,14 @@ Highcharts.chart(newP, {
         layout: 'vertical'
     },
     series: [{
-        name: 'United States',
-        data: [0.30977086, 0.18893212, 0.09814094, 0.02766969, 0.28, 0.31495893], 
+        name: 'Netherlands',
+        data: [70.85384559631348, 82.65077209472656, 81.15325736999512, 63.718239307403564, 
+            82.28918647766113, 81.99205780029297, 89.7507209777832, 82.68065357208252, 65.01437950134277, 77.78923474417793],
         pointPlacement: 'on'
     },{
-        name: 'Netherlands',
-        data: [0.2740479, 0.19611307, 0.10934433, 0.0585002, 0.322, 0.29878288],
+        name: 'United States',
+        data: [73.03541660308838, 77.26181125640869, 79.13576412200928, 68.90966510772705, 
+            69.17028331756592, 78.82894706726074, 74.10174083709717, 72.0220775604248, 66.29130554199219],
         color: Highcharts.getOptions().colors[6],
         pointPlacement: 'on'
     },],
