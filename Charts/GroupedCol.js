@@ -30,6 +30,10 @@ Highcharts.chart(groupedcolct, {
       },
       tickInterval: 1
     },
+    credits: {
+      enabled: false
+    },
+    
     caption: {
       text: '<b>Figure 5</b>',
       align: 'center'

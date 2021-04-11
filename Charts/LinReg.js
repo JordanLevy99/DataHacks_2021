@@ -30,11 +30,17 @@ Highcharts.chart(newLRG, {
       },
       tickInterval: 1
     },
-  
+    credits: {
+      enabled: false
+    },
+    caption: {
+      text: '<b>Figure 3</b>',
+      align: 'center'
+    },
     legend: {
-      layout: 'vertical',
-      align: 'right',
-      verticalAlign: 'middle'
+      layout: 'horizontal',
+      align: 'center',
+      verticalAlign: 'bottom'
     },
   
     plotOptions: {
@@ -106,6 +112,15 @@ Highcharts.chart(newLRL, {
   },
   credits: {
     enabled: false
+  },
+  caption: {
+    text: '<b>Figure 4</b>',
+    align: 'center'
+  },
+  legend: {
+    layout: 'horizontal',
+    align: 'center',
+    verticalAlign: 'bottom'
   },
   series: [{
     name: 'Economic Quality',

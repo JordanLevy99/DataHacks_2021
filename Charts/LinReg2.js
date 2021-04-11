@@ -16,9 +16,6 @@ Highcharts.chart(newLR2, {
 
     title: {
       text: 'Average Global Prosperity Over 2007 - 2014',
-      style: {
-        fontSize: '16px'
-    }
     },
     yAxis: {
       title: {
@@ -26,7 +23,9 @@ Highcharts.chart(newLR2, {
       },
       endOnTick: true
     },
-  
+    credits: {
+      enabled: false
+    },
     xAxis: {
       accessibility: {
         rangeDescription: 'Range: 2007 to 2014'
@@ -99,9 +98,6 @@ document.getElementById('k2').appendChild(newLR2);
 Highcharts.chart(newLR2, {
     title: {
         text: 'Average Pillar Values Over 2007 - 2014',
-        style: {
-          fontSize: '16px'
-      }
     },
     xAxis: {
         accessibility: {
@@ -113,6 +109,9 @@ Highcharts.chart(newLR2, {
         title: {
           text: 'Average Pillar Values'
         },
+      },
+      credits: {
+        enabled: false
       },
       legend: {
         layout: 'vertical',
