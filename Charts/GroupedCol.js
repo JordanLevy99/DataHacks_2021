@@ -110,6 +110,7 @@ Highcharts.chart(groupedcolct, {
     yAxis: {
       title: {
         text: 'Average Change'
+      }
     },
     credits: {
       enabled: false

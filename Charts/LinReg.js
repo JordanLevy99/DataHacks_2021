@@ -113,6 +113,7 @@ Highcharts.chart(newLRL, {
   yAxis: {
     title: {
       text: 'Average Change'
+    }
   },
   credits: {
     enabled: false
